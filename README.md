@@ -5,13 +5,7 @@
 - Copyright (C) 2018 Oldking <oooldking@gmail.com>
  
 ```bash
-Usage:
-
-| No.      | Bash Command                    
-|----------|---------------------------------
-| 1        | wget https://raw.githubusercontent.com/oooldking/script/master/superspeed.sh      
-| 2        | chmod +x superspeed.sh
-| 3        | ./superspeed.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/veip007/cesu/master/superspeed.sh && chmod +x superspeed.sh && bash superspeed.sh
 ```
 ## Superbench.sh
 - Description: Auto test download & I/O speed & network to China script
