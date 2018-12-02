@@ -333,10 +333,10 @@ ip_info(){
 		city=${region}
 	fi
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
+	echo -e " 组织                : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 地点                : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
 ip_info2(){
@@ -348,10 +348,10 @@ ip_info2(){
 	countryCode=$(curl -s https://ipapi.co/country/)
 	region=$(curl -s https://ipapi.co/region/)
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${SKYBLUE}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP           : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
+	echo -e " 组织                : ${SKYBLUE}$org${PLAIN}" | tee -a $log
+	echo -e " 地点                : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
 ip_info3(){
@@ -365,10 +365,10 @@ ip_info3(){
 	countryCode=$(python ip_info.py countryCode)
 	region=$(python ip_info.py regionName)
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
+	echo -e " 组织                : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " 地点                : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
 	rm -rf ip_info.py
 }
@@ -387,10 +387,10 @@ ip_info4(){
 		city=${region}
 	fi
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
+	echo -e " 组织                : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 地点                : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
 	rm -rf tools.py
 	rm -rf ip_json.json
@@ -517,17 +517,17 @@ print_io() {
 }
 
 print_system_info() {
-	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
-	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
-	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
-	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
-	echo -e " Total Space          : ${YELLOW}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total RAM            : ${YELLOW}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
-	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
-	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
-	echo -e " Load Average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
-	echo -e " TCP CC               : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
+	echo -e " CPU 型号            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
+	echo -e " CPU 内核            : ${YELLOW}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
+	echo -e " CPU 缓存            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
+	echo -e " 操作系统            : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
+	echo -e " 内核版本            : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
+	echo -e " 硬盘大小            : ${YELLOW}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
+	echo -e " 内存大小            : ${YELLOW}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
+	echo -e " 缓存大小            : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
+	echo -e " 开机时间            : ${SKYBLUE}$up${PLAIN}" | tee -a $log
+	echo -e " 平均负载值          : ${SKYBLUE}$load${PLAIN}" | tee -a $log
+	echo -e " TCP CC              : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
 }
 
 print_end_time() {
