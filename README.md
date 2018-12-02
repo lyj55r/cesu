@@ -13,7 +13,7 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/veip007/cesu/ma
 - Copyright (C) 2018 Oldking <oooldking@gmail.com>
 
 ```bash
-wget -N --no-check-certificate https://raw.githubusercontent.com/veip007/cesu/master/superbench.sh && chmod +x ssuperbench.sh && bash superbench.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/veip007/cesu/master/superbench.sh && chmod +x superbench.sh && bash superbench.sh
 ```
  
 
