@@ -334,8 +334,8 @@ ip_info(){
 	fi
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 组织                : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " 地点                : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 地理位置            : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
@@ -349,8 +349,8 @@ ip_info2(){
 	region=$(curl -s https://ipapi.co/region/)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
-	echo -e " 组织                : ${SKYBLUE}$org${PLAIN}" | tee -a $log
-	echo -e " 地点                : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${SKYBLUE}$org${PLAIN}" | tee -a $log
+	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
@@ -366,8 +366,8 @@ ip_info3(){
 	region=$(python ip_info.py regionName)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 组织                : ${GREEN}$org${PLAIN}" | tee -a $log
-	echo -e " 地点                : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
 	rm -rf ip_info.py
@@ -398,9 +398,9 @@ ip_info4(){
 	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " 运营商	           : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 地理位置             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " 地区                 : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
 	rm -rf tools.py
 	rm -rf ip_json.json
