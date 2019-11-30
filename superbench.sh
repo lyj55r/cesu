@@ -233,18 +233,18 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '27377' '北京 5G   电信'
-    speed_test '26352' '南京 5G   电信'
-    speed_test '17145' '合肥 5G   电信'
-	speed_test '27594' '广州 5G   电信'
-	speed_test '27154' '天津 5G   电信'
-	speed_test '24447' '上海 5G   电信'
-	speed_test '26678' '广州 5G   联通'
-	speed_test '17184' '天津 5G   移动'
-	speed_test '26850' '无锡 5G   移动'
-	speed_test '27249' '南京 5G   移动'
-	speed_test '26404' '合肥 5G   移动'
-	speed_test '28491' '长沙 5G   移动'
+    speed_test '27377' '北京 5G   电信  '
+    speed_test '26352' '南京 5G   电信  '
+    speed_test '17145' '合肥 5G   电信  '
+	speed_test '27594' '广州 5G   电信  '
+	speed_test '27154' '天津 5G   电信  '
+	speed_test '24447' '上海 5G   电信  '
+	speed_test '26678' '广州 5G   联通  '
+	speed_test '17184' '天津 5G   移动  '
+	speed_test '26850' '无锡 5G   移动  '
+	speed_test '27249' '南京 5G   移动  '
+	speed_test '26404' '合肥 5G   移动  '
+	speed_test '28491' '长沙 5G   移动  '
 	 
 	rm -rf speedtest.py
 }
@@ -253,9 +253,9 @@ print_speedtest_fast() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '27377' '北京 5G   电信'
-	speed_test '24447' '上海 5G   联通'
-	speed_test '27249' '南京 5G   移动'
+    speed_test '27377' '北京 5G   电信  '
+	speed_test '24447' '上海 5G   联通  '
+	speed_test '27249' '南京 5G   移动  '
 	 
 	rm -rf speedtest.py
 }
@@ -334,7 +334,7 @@ ip_info(){
 	fi
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商              : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商                 : ${YELLOW}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
@@ -349,7 +349,7 @@ ip_info2(){
 	region=$(curl -s https://ipapi.co/region/)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
-	echo -e " 运营商              : ${SKYBLUE}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商                 : ${SKYBLUE}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
@@ -366,7 +366,7 @@ ip_info3(){
 	region=$(python ip_info.py regionName)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商              : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商                 : ${GREEN}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
@@ -398,7 +398,7 @@ ip_info4(){
 	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商	            : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商	              : ${YELLOW}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                 : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
