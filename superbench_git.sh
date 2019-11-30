@@ -20,13 +20,12 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.3 (25 Oct 2018)                 / "
+	echo " \                   v1.1.6 (25 Nov 2019)                / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
-	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
-	echo " The Previous Version: superbench_old.sh"
+	echo " Copyright (C) 2019 Oldking oooldking@gmail.com"
 	echo ""
 }
 
@@ -177,17 +176,19 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '5316' 'Nanjing   CT'
-    speed_test '4751' 'Beijing   CT'
-    speed_test '7509' 'Hangzhou  CT'
-	speed_test '4624' 'Chengdu   CT'
-	speed_test '5083' 'Shanghai  CU'
-	speed_test '4863' "Xi'an     CU"
-	speed_test '5726' 'Chongqing CU'
-	speed_test '4665' 'Shanghai  CM'
-	speed_test '4575' 'Chengdu   CM'
-	speed_test '6168' 'Kunming   CM'
-	speed_test '6611' 'Guangzhou CM'
+    speed_test '27377' 'Beijing 5G   CT'
+    speed_test '26352' 'Nanjing 5G   CT'
+    speed_test '17145' 'Hefei 5G     CT'
+	speed_test '27594' 'Guangzhou 5G CT'
+	speed_test '27154' 'TianJin 5G   CU'
+	speed_test '24447' 'Shanghai 5G  CU'
+	speed_test '26678' 'Guangzhou 5G CU'
+	speed_test '17184' 'Tianjin 5G   CM'
+	speed_test '26850' 'Wuxi 5G      CM'
+	speed_test '27249' 'Nanjing 5G   CM'
+	speed_test '26404' 'Hefei 5G     CM'
+	speed_test '28491' 'Changsha 5G  CM'
+
 	 
 	rm -rf speedtest.py
 }
@@ -196,9 +197,9 @@ print_speedtest_fast() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '7509' 'Hangzhou  CT'
-	speed_test '5083' 'Shanghai  CU'
-	speed_test '4575' 'Chengdu   CM'
+    speed_test '27377' 'Beijing 5G   CT'
+	speed_test '24447' 'ShangHai 5G  CU'
+	speed_test '27249' 'Nanjing 5G   CM'
 	 
 	rm -rf speedtest.py
 }
@@ -261,15 +262,25 @@ install_smart() {
 }
 
 ip_info4(){
-	echo $(curl -4 -s http://api.ip.la/en?json) > ip_json.json
-	country=$(python tools.py ipip country_name)
-	city=$(python tools.py ipip city)
+	ip_date=$(curl -4 -s http://api.ip.la/en?json)
+	echo $ip_date > ip_json.json
 	isp=$(python tools.py geoip isp)
 	as_tmp=$(python tools.py geoip as)
 	asn=$(echo $as_tmp | awk -F ' ' '{print $1}')
 	org=$(python tools.py geoip org)
-	countryCode=$(python tools.py ipip country_code)
-	region=$(python tools.py ipip province)
+	if [ -z "ip_date" ]; then
+		echo $ip_date
+		echo "hala"
+		country=$(python tools.py ipip country_name)
+		city=$(python tools.py ipip city)
+		countryCode=$(python tools.py ipip country_code)
+		region=$(python tools.py ipip province)
+	else
+		country=$(python tools.py geoip country)
+		city=$(python tools.py geoip city)
+		countryCode=$(python tools.py geoip countryCode)
+		region=$(python tools.py geoip regionName)	
+	fi
 	if [ -z "$city" ]; then
 		city=${region}
 	fi
@@ -311,6 +322,8 @@ virt_check(){
 	elif [[ "$virtualx" == *kvm-clock* ]]; then
 		virtual="KVM"
 	elif [[ "$cname" == *KVM* ]]; then
+		virtual="KVM"
+	elif [[ "$cname" == *QEMU* ]]; then
 		virtual="KVM"
 	elif [[ "$virtualx" == *"VMware Virtual Platform"* ]]; then
 		virtual="VMware"
@@ -396,13 +409,13 @@ print_io() {
 
 print_system_info() {
 	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
+	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}$freq MHz $arch${PLAIN}" | tee -a $log
 	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
 	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
-	echo -e " Total Space          : ${YELLOW}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total RAM            : ${YELLOW}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
-	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
+	echo -e " Total Space          : ${SKYBLUE}$disk_used_size GB / ${YELLOW}$disk_total_size GB ${PLAIN}" | tee -a $log
+	echo -e " Total RAM            : ${SKYBLUE}$uram MB / ${YELLOW}$tram MB ${SKYBLUE}($bram MB Buff)${PLAIN}" | tee -a $log
+	echo -e " Total SWAP           : ${SKYBLUE}$uswap MB / $swap MB${PLAIN}" | tee -a $log
 	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
 	echo -e " Load Average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
 	echo -e " TCP CC               : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
@@ -459,7 +472,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.3 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.6 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
@@ -469,7 +482,7 @@ sharetest() {
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+		share_link="https://paste.ubuntu.com".$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
 			grep "Location" | awk '{print $3}' );;
 	'haste' )
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
