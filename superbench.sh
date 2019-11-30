@@ -21,13 +21,12 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.1.4 (1 Jan 2019)                 / "
+	echo " \                   v1.1.6 (25 Nov 2019)                / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
 	echo " Copyright (C) 2019 Oldking oooldking@gmail.com"
-	echo -e " ${RED}Happy New Year!${PLAIN}"
 	echo ""
 }
 
@@ -234,17 +233,18 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '5316' '南京电信'
-    speed_test '4751' '北京电信'
-    speed_test '7509' '杭州电信'
-	speed_test '4624' '成都电信'
-	speed_test '5083' '上海联通'
-	speed_test '4863' "西安联通"
-	speed_test '5726' '重庆联通'
-	speed_test '4665' '上海移动'
-	speed_test '4575' '成都移动'
-	speed_test '6168' '昆明移动'
-	speed_test '6611' '广州移动'
+    speed_test '27377' '北京 5G   电信'
+    speed_test '26352' '南京 5G   电信'
+    speed_test '17145' '合肥 5G   电信'
+	speed_test '27594' '广州 5G   电信'
+	speed_test '27154' '天津 5G   电信'
+	speed_test '24447' '上海 5G   电信'
+	speed_test '26678' '广州 5G   联通'
+	speed_test '17184' '天津 5G   移动'
+	speed_test '26850' '无锡 5G   移动'
+	speed_test '27249' '南京 5G   移动'
+	speed_test '26404' '合肥 5G   移动'
+	speed_test '28491' '长沙 5G   移动'
 	 
 	rm -rf speedtest.py
 }
@@ -253,9 +253,9 @@ print_speedtest_fast() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '7509' '杭州电信'
-	speed_test '5083' '上海联通'
-	speed_test '4575' '成都移动'
+    speed_test '27377' '北京 5G   电信'
+	speed_test '24447' '上海 5G   联通'
+	speed_test '27249' '南京 5G   移动'
 	 
 	rm -rf speedtest.py
 }
@@ -334,7 +334,7 @@ ip_info(){
 	fi
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商                 : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${YELLOW}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
@@ -349,7 +349,7 @@ ip_info2(){
 	region=$(curl -s https://ipapi.co/region/)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
-	echo -e " 运营商                 : ${SKYBLUE}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${SKYBLUE}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
@@ -366,7 +366,7 @@ ip_info3(){
 	region=$(python ip_info.py regionName)
 
 	echo -e " ASN & ISP           : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商                 : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商              : ${GREEN}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置            : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
@@ -398,7 +398,7 @@ ip_info4(){
 	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " 运营商	              : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " 运营商	            : ${YELLOW}$org${PLAIN}" | tee -a $log
 	echo -e " 地理位置             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " 地区                 : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
@@ -435,6 +435,8 @@ virt_check(){
 	elif [[ "$virtualx" == *kvm-clock* ]]; then
 		virtual="KVM"
 	elif [[ "$cname" == *KVM* ]]; then
+		virtual="KVM"
+	elif [[ "$cname" == *QEMU* ]]; then
 		virtual="KVM"
 	elif [[ "$virtualx" == *"VMware Virtual Platform"* ]]; then
 		virtual="VMware"
@@ -600,7 +602,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.4 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.6 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
@@ -610,7 +612,7 @@ sharetest() {
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+		share_link="https://paste.ubuntu.com".$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
 			grep "Location" | awk '{print $3}' );;
 	'haste' )
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
